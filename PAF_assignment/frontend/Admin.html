@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	 <link href=
+'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
+          rel='stylesheet'>
+      
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" >
+    </script>
+      
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" >
+    </script>
+</head>
+</head>
+
+<body>
+<div class="container">
+    <h1>Customer Details</h1>
+    <form id="customer_form">
+        <div class="form-group">
+        <input type="text" id="name" required="" placeholder="name..">
+		<span class="error_form" id="name_error"></span>
+        </div>
+		
+		 <div class="form-group">
+            <input type="text" id="address" required=""placeholder="Address..">
+            <span class="error_form" id="address_error"></span>
+            </div>
+			
+			<div class="form-group">
+            <input type="text" id="mobile" required=""placeholder=" Phone number..">
+            <span class="error_form" id="num_error"></span>
+            </div>
+			
+			<div class="form-group">
+            <input type="text" id="catergory" required=""placeholder="catergory..">
+            <span class="error_form" id="catergory_error"></span>
+            </div>
+			
+		    
+			 
+			 <div>
+            <input type="text" id="date_from"  required=""placeholder="Select start Date"  />
+			 <span class="error_form" id="fdate_error"></span>
+           </div>
+		   
+        <div>
+          <input type="text" id="date_to"  required=""placeholder="Select End Date"/>
+		  <span class="error_to" id="edate_error"></span>
+        </div>
+		
+		<div>
+          <input type="text" id="units"  required=""placeholder="Enter Number of units"/>
+		  <span class="error_form" id="unit_error"></span>
+        </div>
+		
+		 <div>
+          <input type="text" id="total"  required=""placeholder="Total"/>
+		  <span class="error_form" id="total_error"></span>
+        </div>
+			  
+			 
+        <input type="submit" value="Submit" name="">
+    
+    </form>
+</div>
+
+<script type="text/javascript">
+
+$(function() {
+
+        $("#name_error").hide();
+        $("#address_error").hide();
+        $("#num_error").hide();
+        $("#catergory_error").hide();
+		$("#fdate_error").hide();
+		$("#edate_error").hide();
+		$("#unit_error").hide();
+		$("#total_error").hide();
+
+        var err_name = false;
+        var err_address = false;
+        var err_phone = false;
+        var err_catergory = false;
+		var err_fdate = false;
+		var err_edate = false;
+		var err_unit = false;
+		var err_total = false;
+//========== CREATING FUNCTION USING JQUERY =========================		
+		 $("#name").focusout(function(){
+            check_name();
+        });
+        $("#address").focusout(function() {
+            check_address();
+        });
+        $("#mobile").focusout(function() {
+            check_mobile();
+        });
+        $("#catergory").focusout(function() {
+            check_catergory();
+			
+		$("#date_from").focusout(function() {
+            check_datefrom();
+			
+		$("#date_to").focusout(function() {
+            check_dateto();
+			
+		$("#units").focusout(function() {
+            check_units();
+			
+		$("#total").focusout(function() {
+            check_total();
+			
+        });
+		
+		//============= validate name =================
+		
+         function check_name() {
+            var pattern = /[a-zZ-A]*$/;
+            var code = $("#name").val();
+			var code_length = $("#name").val().length;
+            if (pattern.test(code) &&  code_length > 31){
+                $("#name_error").hide();
+                $("#name").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#name_error").html(" max length is 31");
+                $("#name_error").show();
+                $("#name").css("border-bottom","2px solid #F90A0A");
+                err_name = true;
+            }
+        }
+		
+// =====================  address ==========
+           function check_address() {
+            var pattern = /[a-zZ-A]*$[1-9]/;
+            var code = $("#address").val();
+			var code_length = $("#address").val().length;
+            if (pattern.test(code) &&  code_length > 31){
+                $("#address_error").hide();
+                $("#address").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#address_error").html(" max length is 31");
+                $("#address_error").show();
+                $("#address").css("border-bottom","2px solid #F90A0A");
+                err_address = true;
+            }
+        }
+//	================= mobile ==================
+	    function check_mobile() {
+            var pattern = /[1-9]/;
+            var code = $("#mobile").val();
+			var code_length = $("#mobile").val().length;
+            if (pattern.test(code) &&  code_length > 10){
+                $("#num_error").hide();
+                $("#mobile").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#num_error").html(" max length is 10");
+                $("#num_error").show();
+                $("#mobile").css("border-bottom","2px solid #F90A0A");
+                err_phone = true;
+            }
+        }
+		
+//======================= catergory ===============
+           function check_catergory() {
+            
+            var type = $("#catergory").val();
+            if ( type !== '') {
+                $("#catergory_error").hide();
+                $("#catergory").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#catergory_error").html("should enter  catergory");
+                $("#catergory_error").show();
+                $("#catergory").css("border-bottom","2px solid #F90A0A");
+                err_catergory = true;
+            }
+        }
+// ============== date f ========================
+
+          function check_datefrom() {
+            
+            var type = $("#date_from").val();
+            if ( type !== '') {
+                $("#fdate_error").hide();
+                $("#date_from").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#fdate_error").html("should enter date_from");
+                $("#fdate_error").show();
+                $("#date_from").css("border-bottom","2px solid #F90A0A");
+                err_fdate = true;
+            }
+        }
+// ======================= e date =================
+              function check_dateto() {
+            
+            var type = $("#date_to").val();
+            if ( type !== '') {
+                $("#edate_error").hide();
+                $("#date_to").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#edate_error").html("should enter date e");
+                $("#edate_error").show();
+                $("#date_to").css("border-bottom","2px solid #F90A0A");
+                err_edate = true;
+            }
+        }		
+		
+// =========== units =============
+
+		      function check_units() {
+            
+            var type = $("#units").val();
+            if ( type !== '') {
+                $("#unit_error").hide();
+                $("#units").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#unit_error").html("should enter units");
+                $("#unit_error").show();
+                $("#units").css("border-bottom","2px solid #F90A0A");
+                err_unit = true;
+            }
+        }
+		
+// ==================== total ==============
+
+               function check_total() {
+            
+            var type = $("#total").val();
+            if ( type !== '') {
+                $("#total_error").hide();
+                $("#total").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#total_error").html("should enter total");
+                $("#total_error").show();
+                $("#total").css("border-bottom","2px solid #F90A0A");
+                err_total = true;
+            }
+        }		
+		
+
+//=====================date picker =====================
+		
+		
+          
+            $(function() {
+                $( "#date_from" ).datepicker();
+            });
+			
+			$(function() {
+                $( "#date_to" ).datepicker();
+            });
+
+// =====================validate submit button ==================
+
+         $("#customer_form").submit(function() {
+         err_name = false;
+         err_address = false;
+         err_phone = false;
+         err_catergory = false;
+		 err_fdate = false;
+		 err_edate = false;
+		 err_unit = false;
+		 err_total = false;
+              
+			   err_name ();
+         err_address ();
+         err_phone ();
+         err_catergory ();
+		 err_fdate ();
+		 err_edate ();
+		 err_unit  ();
+		 err_total ();
+			
+
+            if (err_name === false && err_address === false && err_phone === false 
+			          err_catergory&& err_fdate === false&& err_edate === false ) {
+			          err_unit&& err_fdate === false&& err_total === false ) {
+                alert("user details are Successfull");
+                return true;
+            } else {
+                alert("Please Fill the form Correctly");
+                return false;
+            }
+
+
+        });
+	});	
+
+</script>
+
+
+</body>
